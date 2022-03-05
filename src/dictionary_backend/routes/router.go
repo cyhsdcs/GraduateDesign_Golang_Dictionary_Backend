@@ -9,7 +9,7 @@ import (
 func InitRouter() *gin.Engine {
 	router := gin.Default()
 
-	router.GET("/get/:language/:str", controller.GetInfoByName)
-	router.POST("/upload/:language/:str/:sign", controller.PostInfoByName)
+	router.GET("/get/:language/:str", controller.GetSignAndLocationByStr)
+	router.POST("/upload/:language/:str/:sign", controller.PostInfo)
 	return router
 }

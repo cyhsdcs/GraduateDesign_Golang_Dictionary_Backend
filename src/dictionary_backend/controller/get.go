@@ -12,47 +12,58 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var Db *sqlx.DB
-
-func GetInfoByName(c *gin.Context) {
+func GetSignAndLocationByStr(c *gin.Context) {
 	language := c.Param("language")
 	str := c.Param("str")
-	ConnectSentence := configure.MysqlUsername + ":" + configure.MysqlPassword + "@tcp(" + configure.Address + ":" + configure.MysqlPort + ")/" + configure.DatabaseName
-	database, err1 := sqlx.Connect("mysql", ConnectSentence)
+
+	database, err1 := sqlx.Connect("mysql", configure.ConnectSentence)
 	if err1 != nil {
 		fmt.Println("open mysql failed,", err1)
 		return
 	}
 
-	Db = database
+	configure.Db = database
 
-	rows, err2 := Db.Query("select * from pronounce where str = '" + str + "' and language = '" + language + "'")
+	rows, err2 := configure.Db.Query("select * from pronounce where str = '" + str + "' and language = '" + language + "'")
 	if err2 != nil {
 		fmt.Println("exec failed, ", err2)
 		return
 	}
 
-	var data []string
-	for rows.Next() {
-		var sign string
-		var language string
-		var word string
+	var data map[string][]string
+	data = make(map[string][]string)
+	var lan string
+	var word string
+	var sign string
+	var location string
+	lastSign := ""
 
-		err3 := rows.Scan(&sign, &language, &word)
+	var locationArray []string
+	for rows.Next() {
+
+		err3 := rows.Scan(&lan, &word, &sign, &location)
 		if err3 != nil {
 			fmt.Println("scan failed, ", err3)
 			return
 		}
-
-		data = append(data, sign)
+		if sign != lastSign {
+			if locationArray != nil {
+				data[lastSign] = locationArray
+				locationArray = nil
+			}
+			lastSign = sign
+		}
+		locationArray = append(locationArray, location)
 	}
+	data[lastSign] = locationArray
+
 	c.JSON(http.StatusOK, gin.H{
 		"status": "success",
 		"data":   data,
 	})
 
 	//	c.String(http.StatusOK, pronounce)
-	err4 := Db.Close()
+	err4 := configure.Db.Close()
 	if err4 != nil {
 		fmt.Println("close failed, ", err4)
 		return
