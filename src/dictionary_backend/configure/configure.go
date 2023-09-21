@@ -12,6 +12,6 @@ var TableName = "pronounce"       //表名
 var ConnectSentence = MysqlUsername + ":" + MysqlPassword + "@tcp(" + Address + ":" + MysqlPort + ")/" + DatabaseName
 var Db *sqlx.DB
 
-var Path = "../../../music/"
+//var Path = "../../../music"
 
-//var Path = "./music/"
+var Path = "./music"

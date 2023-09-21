@@ -1,3 +1,7 @@
+github.com/DataDog/go-python3 v0.0.0-20211102160307-40adc605f1fe h1:bNMi0HArOQY4899TKLi4RP7g9BZ2kwLOiVpoJHWxyFs=
+github.com/DataDog/go-python3 v0.0.0-20211102160307-40adc605f1fe/go.mod h1:7ctnOCLiUlwKO9GvAjusUF68edSbiHqC18gVPQF0ojA=
+github.com/datadog/go-python3 v0.0.0-20211102160307-40adc605f1fe h1:7o6GeOqLmEjZ35kKlB/laZMN3FyMQ9qDjziYr0vO/HA=
+github.com/datadog/go-python3 v0.0.0-20211102160307-40adc605f1fe/go.mod h1:4CZoAKoovi8bMWcoOsB/KO8B5LIxQbYRUIp6HtbSGMo=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
